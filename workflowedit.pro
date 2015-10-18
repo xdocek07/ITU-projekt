@@ -16,10 +16,12 @@ CONFIG += c++11
 SOURCES += main.cpp\
         mainwindow.cpp \
     workplace.cpp \
-    model.cpp
+    model.cpp \
+    node.cpp
 
 HEADERS  += mainwindow.h \
     workplace.h \
-    model.h
+    model.h \
+    node.h
 
 FORMS    += mainwindow.ui
