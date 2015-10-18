@@ -21,6 +21,7 @@ protected:
 
     QString label;
     QColor color;
+    QRectF rect;
 };
 
 #endif // NODE_H

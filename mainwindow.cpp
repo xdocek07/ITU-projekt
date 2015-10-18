@@ -15,10 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     model = new Model();
     model->loadTest();
+
     updateScene();
 
     QAction *addNew = new QAction(tr("Add new"), this);
-    addNew->setShortcut(QKeyEvent::Enter);
+    addAction(addNew);
+    addNew->setShortcut(QKeySequence(tr("Ctrl+N")));
     connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
 }
 
@@ -53,7 +55,8 @@ void MainWindow::updateScene()
 
 void MainWindow::addNewNode()
 {
-
+    qDebug() << "fuck\n";
+    scene->addItem(new Node("fuckit", Qt::blue));
 }
 
 

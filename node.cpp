@@ -7,6 +7,12 @@ Node::Node(const QString label, const QColor color)
 
     this->color = color;
     this->color.setAlpha(160);
+
+    int x = rand() % 150;
+    int y = rand() % 150;
+    int z = rand() % 150;
+    int w = rand() % 150;
+    rect = QRectF(x, y, z, w);
 }
 
 Node::~Node()
@@ -16,11 +22,7 @@ Node::~Node()
 
 QRectF Node::boundingRect() const
 {
-    int x = rand() % 150;
-    int y = rand() % 150;
-    int z = rand() % 150;
-    int w = rand() % 150;
-    return QRectF(x, y, z, w);
+    return rect;
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
