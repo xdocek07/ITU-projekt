@@ -29,8 +29,13 @@ QRectF Node::boundingRect() const
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF rect = boundingRect();
+    if(!widget){
+        return;
+    }
 
+    if(option){
+        qDebug() << "Paint option: " << option;
+    }
     /*
     QBrush brush(Qt::green);
     QLinearGradient g(rect.topLeft(), rect.bottomRight());
@@ -49,11 +54,12 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     qDebug() << "selected node " << id;
+    QGraphicsItem::mousePressEvent(event);
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

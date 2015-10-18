@@ -20,11 +20,10 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
+    const unsigned int id;
     QString label;
     QColor color;
     QRectF rect;
-
-    const unsigned int id;
 };
 
 #endif // NODE_H
