@@ -16,23 +16,29 @@ Node::~Node()
 
 QRectF Node::boundingRect() const
 {
-    return QRectF(10, 10, 50, 50);
+    int x = rand() % 150;
+    int y = rand() % 150;
+    int z = rand() % 150;
+    int w = rand() % 150;
+    return QRectF(x, y, z, w);
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF rect = boundingRect();
-    QBrush brush(Qt::green);
 
     /*
+    QBrush brush(Qt::green);
     QLinearGradient g(rect.topLeft(), rect.bottomRight());
     g.setColorAt(0, c.dark(150));
     g.setColorAt(0.5, c.light(200));
     g.setColorAt(1, c.dark(150));
-*/
+    painter->fillRect(rect, brush);
+    */
+
     painter->setBrush(color);
     painter->drawEllipse(rect);
-    //painter->fillRect(rect, brush);
+
     painter->drawText(rect, Qt::AlignCenter, label);
 }
 

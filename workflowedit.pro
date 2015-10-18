@@ -17,11 +17,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     workplace.cpp \
     model.cpp \
-    node.cpp
+    node.cpp \
+    edge.cpp
 
 HEADERS  += mainwindow.h \
     workplace.h \
     model.h \
-    node.h
+    node.h \
+    edge.h
 
 FORMS    += mainwindow.ui

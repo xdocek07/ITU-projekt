@@ -24,6 +24,9 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     Model *model;
+
+protected slots:
+    void addNewNode();
 };
 
 #endif // MAINWINDOW_H

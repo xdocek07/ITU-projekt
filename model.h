@@ -5,6 +5,7 @@
 #include <vector>
 #include <QGraphicsItem>
 #include "node.h"
+#include "edge.h"
 
 class Model
 {
@@ -15,11 +16,13 @@ public:
 
     void loadTest();
 
-    std::vector<std::shared_ptr<QGraphicsItem> > &getItems() {return items;};
+    std::vector<std::shared_ptr<QGraphicsItem>> &getItems() {return items;}
+    std::vector<std::shared_ptr<Edge>> &getEdges() {return edges;}
 
 private:
 
-     std::vector<std::shared_ptr<QGraphicsItem> > items;
+    std::vector<std::shared_ptr<QGraphicsItem>> items;
+    std::vector<std::shared_ptr<Edge>> edges;
 };
 
 #endif // MODEL_H
