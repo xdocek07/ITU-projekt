@@ -11,12 +11,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = workflowedit
 TEMPLATE = app
 
+CONFIG += c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    workplace.cpp
+    workplace.cpp \
+    model.cpp
 
 HEADERS  += mainwindow.h \
-    workplace.h
+    workplace.h \
+    model.h
 
 FORMS    += mainwindow.ui
