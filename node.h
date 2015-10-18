@@ -9,7 +9,7 @@
 class Node : public QGraphicsItem
 {
 public:
-    Node(const QString label, const QColor color = Qt::gray);
+    Node(const unsigned int id, const QString label, const QColor color = Qt::gray);
     ~Node();
 
     QRectF boundingRect() const;
@@ -18,10 +18,13 @@ public:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
     QString label;
     QColor color;
     QRectF rect;
+
+    const unsigned int id;
 };
 
 #endif // NODE_H

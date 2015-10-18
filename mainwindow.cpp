@@ -56,7 +56,7 @@ void MainWindow::updateScene()
 void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
-    scene->addItem(new Node("fuckit", Qt::blue));
+    scene->addItem(new Node(58, "fuckit", Qt::blue));
 }
 
 

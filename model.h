@@ -23,6 +23,8 @@ private:
 
     std::vector<std::shared_ptr<QGraphicsItem>> items;
     std::vector<std::shared_ptr<Edge>> edges;
+
+    unsigned int itemId;
 };
 
 #endif // MODEL_H

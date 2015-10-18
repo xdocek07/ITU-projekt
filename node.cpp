@@ -1,7 +1,9 @@
 #include "node.h"
+#include <QDebug>
 
-Node::Node(const QString label, const QColor color)
-    : label{label}
+Node::Node(const unsigned int id, const QString label, const QColor color)
+    : id{id},
+      label{label}
 {
     setFlag(QGraphicsItem::ItemIsMovable);
 
@@ -46,10 +48,18 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    qDebug() << "selected node " << id;
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 
+}
+
+void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    label = QString("hello");
+    qDebug() << "doubleclicked node " << id;
+    QGraphicsItem::mouseDoubleClickEvent(event);
+    update();
 }
