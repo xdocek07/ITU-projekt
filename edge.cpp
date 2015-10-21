@@ -58,8 +58,8 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 
 
-    QPointF start(from->boundingRect().center());
-    QPointF end(to->boundingRect().center());
+    QPointF start(from->sceneBoundingRect().center());
+    QPointF end(to->sceneBoundingRect().center());
     painter->setBrush(Qt::black);
 
 
@@ -71,17 +71,18 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Edge::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    QGraphicsItem::mousePressEvent(event);
 }
 
 void Edge::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void Edge::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    QGraphicsItem::mouseDoubleClickEvent(event);
+    update();
 }
 
 

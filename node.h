@@ -5,6 +5,9 @@
 #include <QGraphicsItem>
 #include <QColor>
 #include <QString>
+#include "edge.h"
+
+class Edge;
 
 class Node : public QGraphicsItem
 {
@@ -15,6 +18,10 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    std::vector<Edge *> getEdges() const;
+    void setEdges(const std::vector<Edge *> &value);
+    void addEdge(Edge *edge) {edges.push_back(edge);}
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
@@ -24,6 +31,8 @@ protected:
     QString label;
     QColor color;
     QRectF rect;
+
+    std::vector<Edge *> edges;
 };
 
 #endif // NODE_H

@@ -68,4 +68,18 @@ void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "doubleclicked node " << id;
     QGraphicsItem::mouseDoubleClickEvent(event);
     update();
+    for(auto e: edges)
+    {
+        e->update();
+    }
 }
+std::vector<Edge *> Node::getEdges() const
+{
+    return edges;
+}
+
+void Node::setEdges(const std::vector<Edge *> &value)
+{
+    edges = value;
+}
+
