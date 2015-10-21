@@ -5,10 +5,10 @@
 #include <QGraphicsItem>
 #include "node.h"
 
-class Edge
+class Edge : public QGraphicsItem
 {
 public:
-    Edge(QGraphicsItem *from, QGraphicsItem *to, QString label = "");
+    Edge(const unsigned int id, QGraphicsItem *from, QGraphicsItem *to, QString label = "");
     ~Edge();
 
     QString getLabel() const;
@@ -19,8 +19,16 @@ public:
 
     QGraphicsItem *getTo() const;
     void setTo(QGraphicsItem *value);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    const unsigned int id;
     QGraphicsItem *from;
     QGraphicsItem *to;
     QString label;

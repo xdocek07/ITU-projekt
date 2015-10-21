@@ -16,13 +16,10 @@ public:
 
     void loadTest();
 
-    std::vector<std::shared_ptr<QGraphicsItem>> &getItems() {return items;}
-    std::vector<std::shared_ptr<Edge>> &getEdges() {return edges;}
+    std::vector<QGraphicsItem *> &getItems() {return items;}
 
 private:
-
-    std::vector<std::shared_ptr<QGraphicsItem>> items;
-    std::vector<std::shared_ptr<Edge>> edges;
+    std::vector<QGraphicsItem *> items;
 
     unsigned int itemId;
 };

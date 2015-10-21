@@ -37,19 +37,7 @@ void MainWindow::updateScene()
 {
     for(auto item : model->getItems())
     {
-         scene->addItem(item.get());
-    }
-
-    for(auto edge : model->getEdges())
-    {
-        QPainter painter(this);
-        QPen pen;
-        pen.setBrush(QBrush(Qt::blue));
-        scene->addLine((qreal)edge.get()->getFrom()->boundingRect().center().x(),
-                       (qreal)edge.get()->getFrom()->boundingRect().center().y(),
-                       (qreal)edge.get()->getTo()->boundingRect().center().x(),
-                       (qreal)edge.get()->getTo()->boundingRect().center().y()
-                       );
+         scene->addItem(item);
     }
 }
 
