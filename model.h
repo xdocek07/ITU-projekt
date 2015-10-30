@@ -16,11 +16,11 @@ public:
 
     void loadTest();
 
-    std::vector<QGraphicsItem *> &getItems() {return items;}
-
+    std::vector<Node *> &getNodes() {return nodes;}
+    std::vector<Edge *> &getEdges() {return edges;}
 private:
-    std::vector<QGraphicsItem *> items;
-
+    std::vector<Node *> nodes;
+    std::vector<Edge *> edges;
     unsigned int itemId;
 };
 

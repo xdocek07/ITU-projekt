@@ -5,20 +5,22 @@
 #include <QGraphicsItem>
 #include "node.h"
 
+class Node;
+
 class Edge : public QGraphicsItem
 {
 public:
-    Edge(const unsigned int id, QGraphicsItem *from, QGraphicsItem *to, QString label = "");
+    Edge(const unsigned int id, Node *from, Node *to, QString label = "");
     ~Edge();
 
     QString getLabel() const;
     void setLabel(const QString &value);
 
-    QGraphicsItem *getFrom() const;
-    void setFrom(QGraphicsItem *value);
+    Node *getFrom() const;
+    void setFrom(Node *value);
 
-    QGraphicsItem *getTo() const;
-    void setTo(QGraphicsItem *value);
+    Node *getTo() const;
+    void setTo(Node *value);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -29,9 +31,10 @@ protected:
 
 private:
     const unsigned int id;
-    QGraphicsItem *from;
-    QGraphicsItem *to;
+    Node *from;
+    Node *to;
     QString label;
+    QRectF rect;
 };
 
 #endif // EDGE_H

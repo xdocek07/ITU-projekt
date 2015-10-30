@@ -27,6 +27,7 @@ private:
 
 protected slots:
     void addNewNode();
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // MAINWINDOW_H

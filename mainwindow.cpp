@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-
+    ui->graphicsView->resize(this->width() - 10, this->height() - 15);
     model = new Model();
     model->loadTest();
 
@@ -35,7 +35,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateScene()
 {
-    for(auto item : model->getItems())
+    for(auto item : model->getNodes())
+    {
+         scene->addItem(item);
+    }
+
+    for(auto item : model->getEdges())
     {
          scene->addItem(item);
     }
@@ -45,6 +50,14 @@ void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
     scene->addItem(new Node(58, "fuckit", Qt::blue));
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    if(event)
+    {
+        ui->graphicsView->resize(this->width() - 10, this->height() - 15);
+    }
 }
 
 

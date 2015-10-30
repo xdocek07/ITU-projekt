@@ -1,20 +1,18 @@
 #include "node.h"
 #include <QDebug>
 
-Node::Node(const unsigned int id, const QString label, const QColor color)
+Node::Node(const unsigned int id, const QString label, const QColor color, int x, int y, int len)
     : id{id},
-      label{label}
+      label{label},
+      active{false},
+      diameter{len}
 {
     setFlag(QGraphicsItem::ItemIsMovable);
 
     this->color = color;
     this->color.setAlpha(160);
 
-    int x = rand() % 150;
-    int y = rand() % 150;
-    int z = rand() % 150;
-    int w = rand() % 150;
-    rect = QRectF(x, y, z, w);
+    rect = QRectF(0, 0, len, len);
 }
 
 Node::~Node()
@@ -24,7 +22,7 @@ Node::~Node()
 
 QRectF Node::boundingRect() const
 {
-    return rect;
+    return QRectF(0, 0, diameter, diameter);
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -44,8 +42,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     g.setColorAt(1, c.dark(150));
     painter->fillRect(rect, brush);
     */
+    QColor drawColor = active ? Qt::green : color;
 
-    painter->setBrush(color);
+    painter->setBrush(drawColor);
     painter->drawEllipse(rect);
 
     painter->drawText(rect, Qt::AlignCenter, label);
@@ -53,12 +52,16 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    active = true;
     qDebug() << "selected node " << id;
+    update();
     QGraphicsItem::mousePressEvent(event);
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    active = false;
+    update();
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
@@ -66,20 +69,18 @@ void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     label = QString("hello");
     qDebug() << "doubleclicked node " << id;
-    QGraphicsItem::mouseDoubleClickEvent(event);
-    update();
+
+
     for(auto e: edges)
     {
         e->update();
     }
-}
-std::vector<Edge *> Node::getEdges() const
-{
-    return edges;
+    update();
+    QGraphicsItem::mouseDoubleClickEvent(event);
 }
 
-void Node::setEdges(const std::vector<Edge *> &value)
+void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    edges = value;
+    update();
+    QGraphicsItem::mouseMoveEvent(event);
 }
-
