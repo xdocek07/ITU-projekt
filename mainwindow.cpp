@@ -52,9 +52,9 @@ void MainWindow::updateScene()
 void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
-    scene->addItem(new Node(58, "fuckit", Qt::blue));
-
-
+    Node *node = new Node(58, "", Qt::blue);
+    scene->addItem(node);
+    node->setScene(scene);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

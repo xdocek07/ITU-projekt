@@ -38,8 +38,10 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         qDebug() << "Paint option: " << option;
     }
 
+    // prisun label
     labelItem->setX(scenePos().x() + diameter / 4);
     labelItem->setY(scenePos().y() + diameter / 4);
+
     /*
     QBrush brush(Qt::green);
     QLinearGradient g(rect.topLeft(), rect.bottomRight());
