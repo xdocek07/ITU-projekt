@@ -8,11 +8,14 @@ Node::Node(const unsigned int id, const QString label, const QColor color, int x
       diameter{len}
 {
     setFlag(QGraphicsItem::ItemIsMovable);
-
     this->color = color;
     this->color.setAlpha(160);
 
     rect = QRectF(0, 0, len, len);
+    labelItem = new QGraphicsTextItem;
+    labelItem->setTextInteractionFlags(Qt::TextInteractionFlag::TextEditable);
+    labelItem->setPos(rect.x(), rect.y());
+    labelItem->setPlainText(label);
 }
 
 Node::~Node()
@@ -34,6 +37,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(option){
         qDebug() << "Paint option: " << option;
     }
+
+    labelItem->setX(scenePos().x() + diameter / 4);
+    labelItem->setY(scenePos().y() + diameter / 4);
     /*
     QBrush brush(Qt::green);
     QLinearGradient g(rect.topLeft(), rect.bottomRight());
@@ -47,7 +53,17 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setBrush(drawColor);
     painter->drawEllipse(rect);
 
-    painter->drawText(rect, Qt::AlignCenter, label);
+    // replaced by labelItem
+    //painter->drawText(rect, Qt::AlignCenter, label);
+}
+
+void Node::setScene(QGraphicsScene *uiscene)
+{
+    scene = uiscene;
+    if(scene && labelItem)
+       scene->addItem(labelItem);
+    else
+       qDebug() << "scene;fuck sceneL";
 }
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -67,10 +83,6 @@ void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    label = QString("hello");
-    qDebug() << "doubleclicked node " << id;
-
-
     for(auto e: edges)
     {
         e->update();

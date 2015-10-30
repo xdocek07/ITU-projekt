@@ -38,6 +38,9 @@ void MainWindow::updateScene()
     for(auto item : model->getNodes())
     {
          scene->addItem(item);
+
+         item->setScene(scene);
+         qDebug() << &scene ;
     }
 
     for(auto item : model->getEdges())
@@ -50,6 +53,8 @@ void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
     scene->addItem(new Node(58, "fuckit", Qt::blue));
+
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

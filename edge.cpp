@@ -88,6 +88,11 @@ void Edge::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void Edge::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {    
+    QGraphicsTextItem * io = new QGraphicsTextItem;
+    io->setPos(150,70);
+    io->setPlainText("Barev");
+
+
     update();
     QGraphicsItem::mouseDoubleClickEvent(event);
 }
