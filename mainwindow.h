@@ -27,6 +27,7 @@ private:
 
 protected slots:
     void addNewNode();
+    void deleteSceneItems();
     void resizeEvent(QResizeEvent* event);
 };
 

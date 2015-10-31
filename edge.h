@@ -23,6 +23,7 @@ public:
     void setTo(Node *value);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    bool isActive() const;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

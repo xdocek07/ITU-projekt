@@ -8,11 +8,14 @@ Node::Node(const unsigned int id, const QString label, const QColor color, int x
       diameter{len}
 {
     setFlag(QGraphicsItem::ItemIsMovable);
+    setFlag(QGraphicsItem::ItemIsFocusable);
     this->color = color;
     this->color.setAlpha(160);
 
+    setX(x);
+    setY(y);
     rect = QRectF(0, 0, len, len);
-    labelItem = new QGraphicsTextItem;
+    labelItem = new QGraphicsTextItem(this);
     labelItem->setTextInteractionFlags(Qt::TextInteractionFlag::TextEditable);
     labelItem->setPos(rect.x(), rect.y());
     labelItem->setPlainText(label);
@@ -35,7 +38,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 
     if(option){
-        qDebug() << "Paint option: " << option;
+        //qDebug() << "Paint option: " << option;
     }
 
     // prisun label
@@ -65,15 +68,22 @@ void Node::setScene(QGraphicsScene *uiscene)
     if(scene && labelItem)
        scene->addItem(labelItem);
     else
-       qDebug() << "scene;fuck sceneL";
+        qDebug() << "scene;fuck sceneL";
+}
+
+bool Node::isActive() const
+{
+    return active;
 }
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     active = true;
-    qDebug() << "selected node " << id;
+    scene->setFocusItem(this);
+    qDebug() << "selected node " << id ;
     update();
     QGraphicsItem::mousePressEvent(event);
+
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

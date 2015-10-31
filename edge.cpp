@@ -97,5 +97,9 @@ void Edge::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseDoubleClickEvent(event);
 }
 
+bool Edge::isActive() const
+{
+    return false;
+}
 
 

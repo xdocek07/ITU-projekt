@@ -25,6 +25,8 @@ public:
     void addEdge(Edge *edge) {edges.push_back(edge);}
     int getDiameter() const {return diameter;}
     void setScene(QGraphicsScene *uiscene);
+    const unsigned int getId() {return id;}
+    bool isActive() const;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

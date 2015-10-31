@@ -22,6 +22,11 @@ MainWindow::MainWindow(QWidget *parent) :
     addAction(addNew);
     addNew->setShortcut(QKeySequence(tr("Ctrl+N")));
     connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
+
+    QAction *deleteItems = new QAction(tr("Delete items"), this);
+    deleteItems->setShortcut(QKeySequence::Delete);
+    connect(deleteItems, SIGNAL(triggered()), this, SLOT(deleteSceneItems()));
+    addAction(deleteItems);
 }
 
 MainWindow::~MainWindow()
@@ -53,8 +58,36 @@ void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
     Node *node = new Node(58, "", Qt::blue);
-    scene->addItem(node);
-    node->setScene(scene);
+
+   scene->addItem(node);
+
+   node->setScene(scene);
+}
+
+void MainWindow::deleteSceneItems()
+{
+    qDebug() << "deleting";
+    /*
+    for(auto item : scene->focusItem())
+    {
+
+        if(item->isActive())
+        {
+            qDebug() << item;
+            item->setVisible(false);
+            scene->removeItem(item);
+            delete item;
+        }
+    }
+
+    */
+    if(scene->focusItem())
+    {
+        scene->focusItem()->setVisible(false);
+
+        scene->removeItem(scene->focusItem());
+        delete scene->focusItem();
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
