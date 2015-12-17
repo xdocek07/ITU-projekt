@@ -7,6 +7,7 @@ Edge::Edge(const unsigned int id, Node *from, Node *to, QString label)
       to{to},
       label{label}
 {
+    active = false;
     rect = QRectF(from->x(), from->y(), to->x(), to->y());
 }
 
@@ -45,20 +46,22 @@ void Edge::setTo(Node *value)
 
 QRectF Edge::boundingRect() const
 {
-    return QRectF(from->x(), from->y(), to->x(), to->y());
+    //return QRectF(0, 0, 2 * abs(from->x() - to->x()), 2 * abs(from->y() - to->y()));
+    return QRectF(from->sceneBoundingRect().center(), to->sceneBoundingRect().center());
 }
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
     if(!widget){
         return;
     }
 
     if(option){
-        qDebug() << "Paint option: " << option;
+        //qDebug() << "Paint option: " << option;
     }
 
-    rect = QRectF(from->x(), from->y(), to->x(), to->y());
+    //rect = QRectF(from->x(), from->y(), to->x(), to->y());
 
     QPointF start(from->sceneBoundingRect().center());
     QPointF end(to->sceneBoundingRect().center());
@@ -72,7 +75,8 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawLine(end - QPoint(0, 20), end);
     painter->drawLine(end + QPoint(20, 0), end);
     */
-    QPointF labelPos = QPointF(start.x() + ((start.x() - end.x()) / 2), start.y() + ((start.y() - end.y()) / 2));
+
+    QPointF labelPos = QPointF(start.x() + (abs(start.x() - end.x())), start.y() + (abs(start.y() - end.y()))) / 2.0;
     painter->drawText(labelPos, label);
 }
 
@@ -88,18 +92,13 @@ void Edge::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void Edge::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {    
-    QGraphicsTextItem * io = new QGraphicsTextItem;
-    io->setPos(150,70);
-    io->setPlainText("Barev");
-
-
     update();
     QGraphicsItem::mouseDoubleClickEvent(event);
 }
 
 bool Edge::isActive() const
 {
-    return false;
+    return active;
 }
 
 

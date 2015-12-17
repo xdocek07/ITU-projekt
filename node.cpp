@@ -42,9 +42,12 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 
     // prisun label
-    labelItem->setX(scenePos().x() + diameter / 4);
-    labelItem->setY(scenePos().y() + diameter / 4);
-
+    labelItem->setPos(rect.center() - QPointF(diameter / 4, diameter / 4));
+  /*
+    labelItem->setX(pax() + diameter / 4);
+    labelItem->setY(y() + diameter / 4);
+    */
+    //labelItem->setPos(sceneBoundingRect().center());
     /*
     QBrush brush(Qt::green);
     QLinearGradient g(rect.topLeft(), rect.bottomRight());
@@ -53,6 +56,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     g.setColorAt(1, c.dark(150));
     painter->fillRect(rect, brush);
     */
+
     QColor drawColor = active ? Qt::green : color;
 
     painter->setBrush(drawColor);
@@ -83,28 +87,33 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "selected node " << id ;
     update();
     QGraphicsItem::mousePressEvent(event);
-
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     active = false;
+/*
+    if (event->button() == Qt::MiddleButton) {
+        qDebug() << "middle button";
+    }
+*/
     update();
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
-{
-    for(auto e: edges)
-    {
-        e->update();
-    }
+{    
     update();
     QGraphicsItem::mouseDoubleClickEvent(event);
 }
 
 void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+
+    for(auto e: edges)
+    {
+        e->update();
+    }
     update();
     QGraphicsItem::mouseMoveEvent(event);
 }

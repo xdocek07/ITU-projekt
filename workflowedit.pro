@@ -14,16 +14,16 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    workplace.cpp \
+    mainwindow.cpp \
     model.cpp \
     node.cpp \
-    edge.cpp
+    edge.cpp \
+    undo.cpp
 
 HEADERS  += mainwindow.h \
-    workplace.h \
     model.h \
     node.h \
-    edge.h
+    edge.h \
+    undo.h
 
 FORMS    += mainwindow.ui

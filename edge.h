@@ -32,6 +32,7 @@ protected:
 
 private:
     const unsigned int id;
+    bool active;
     Node *from;
     Node *to;
     QString label;

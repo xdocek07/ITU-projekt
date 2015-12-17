@@ -3,11 +3,18 @@
 
 #include <memory>
 #include <vector>
+#include <map>
 #include <QGraphicsItem>
+#include <QString>
 #include "node.h"
 #include "edge.h"
+#include <QUndoStack>
+#include <QObject>
+#include "undo.h"
 
-class Model
+
+
+class Model : public QObject
 {
 
 public:
@@ -16,12 +23,24 @@ public:
 
     void loadTest();
 
-    std::vector<Node *> &getNodes() {return nodes;}
-    std::vector<Edge *> &getEdges() {return edges;}
-private:
-    std::vector<Node *> nodes;
-    std::vector<Edge *> edges;
+    std::map<int, Node *> &getNodes() {return nodes;}
+    std::map<int, Edge *> &getEdges() {return edges;}
+
+    unsigned int getAutoincrement() {return ++itemId;}
+
+    Node *addNode(const QString label = "", const QColor color = Qt::gray, int x = 0, int y = 0, int len = 20);
+    Node *addNode(Node *node);
+    void addEdge(Node *from, Node *to, QString label = "");
+    void saveAction(QUndoCommand *newCommand);
+
+    QUndoStack *undoStack() const {return m_undoStack;}
+
+private:    
+    std::map<int, Node *> nodes;
+    std::map<int, Edge *> edges;
     unsigned int itemId;
+    Node *previous;
+    QUndoStack *m_undoStack;
 };
 
 #endif // MODEL_H
