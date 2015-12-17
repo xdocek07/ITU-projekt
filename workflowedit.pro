@@ -14,14 +14,12 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    workplace.cpp \
+    mainwindow.cpp \
     model.cpp \
     node.cpp \
     edge.cpp
 
 HEADERS  += mainwindow.h \
-    workplace.h \
     model.h \
     node.h \
     edge.h
