@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include "model.h"
 #include "node.h"
+#include <QUndoGroup>
+#include "undo.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +26,9 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     Model *model;
+    Node *previous;
+    QUndoGroup *m_undoGroup;
+    QUndoStack *m_undoStack;
 
 protected slots:
     void addNewNode();

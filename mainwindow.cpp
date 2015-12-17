@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <stdio.h>
+#include "undo.h"
+#include <QUndoGroup>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,10 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(this->width() - 10, this->height() - 15);
-    model = new Model();
-    model->loadTest();
+    QUndoGroup *m_undoGroup = new QUndoGroup(this);
 
-    updateScene();
+    m_undoStack = new QUndoStack(this);
+
+
 
     QAction *addNew = new QAction(tr("Add new"), this);
     addAction(addNew);
@@ -26,6 +29,18 @@ MainWindow::MainWindow(QWidget *parent) :
     deleteItems->setShortcut(QKeySequence::Delete);
     connect(deleteItems, SIGNAL(triggered()), this, SLOT(deleteSceneItems()));
     addAction(deleteItems);
+
+    m_undoGroup->addStack(m_undoStack);
+    m_undoGroup->setActiveStack(m_undoStack);
+
+    model = new Model();
+    model->loadTest();
+    updateScene();
+
+    QAction *undoAction = m_undoGroup->createUndoAction(this);
+    QAction *redoAction = m_undoGroup->createRedoAction(this);
+    undoAction->setShortcut(QKeySequence(tr("Ctrl+Z")));
+    redoAction->setShortcut(QKeySequence(tr("Ctrl+Y")));
 }
 
 MainWindow::~MainWindow()
@@ -56,11 +71,9 @@ void MainWindow::updateScene()
 void MainWindow::addNewNode()
 {
     qDebug() << "fuck\n";
-    Node *node = new Node(58, "", Qt::blue);
-
-   scene->addItem(node);
-
-   node->setScene(scene);
+    Node *node = model->addNode();
+    scene->addItem(node);
+    node->setScene(scene);
 }
 
 void MainWindow::deleteSceneItems()
@@ -83,9 +96,9 @@ void MainWindow::deleteSceneItems()
     if(scene->focusItem())
     {
         scene->focusItem()->setVisible(false);
-
         scene->removeItem(scene->focusItem());
         delete scene->focusItem();
+        //Model->undoStack()->push(new DeleteSceneCommand(model->id));
     }
 }
 
