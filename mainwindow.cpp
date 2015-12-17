@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "workplace.h"
 #include <QDebug>
 #include <stdio.h>
 
@@ -42,15 +41,15 @@ void MainWindow::updateScene()
 {
     for(auto item : model->getNodes())
     {
-         scene->addItem(item);
+         scene->addItem(item.second);
 
-         item->setScene(scene);
+         item.second->setScene(scene);
          qDebug() << &scene ;
     }
 
     for(auto item : model->getEdges())
     {
-         scene->addItem(item);
+         scene->addItem(item.second);
     }
 }
 

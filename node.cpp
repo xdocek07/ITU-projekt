@@ -87,7 +87,6 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "selected node " << id ;
     update();
     QGraphicsItem::mousePressEvent(event);
-
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

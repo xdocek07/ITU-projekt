@@ -7,6 +7,7 @@ Edge::Edge(const unsigned int id, Node *from, Node *to, QString label)
       to{to},
       label{label}
 {
+    active = false;
     rect = QRectF(from->x(), from->y(), to->x(), to->y());
 }
 
@@ -97,7 +98,7 @@ void Edge::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 
 bool Edge::isActive() const
 {
-    return false;
+    return active;
 }
 
 

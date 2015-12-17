@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <map>
 #include <QGraphicsItem>
 #include "node.h"
 #include "edge.h"
@@ -16,11 +17,11 @@ public:
 
     void loadTest();
 
-    std::vector<Node *> &getNodes() {return nodes;}
-    std::vector<Edge *> &getEdges() {return edges;}
+    std::map<int, Node *> &getNodes() {return nodes;}
+    std::map<int, Edge *> &getEdges() {return edges;}
 private:
-    std::vector<Node *> nodes;
-    std::vector<Edge *> edges;
+    std::map<int, Node *> nodes;
+    std::map<int, Edge *> edges;
     unsigned int itemId;
 };
 
