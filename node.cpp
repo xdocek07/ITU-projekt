@@ -92,6 +92,11 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     active = false;
+/*
+    if (event->button() == Qt::MiddleButton) {
+        qDebug() << "middle button";
+    }
+*/
     update();
     QGraphicsItem::mouseReleaseEvent(event);
 }

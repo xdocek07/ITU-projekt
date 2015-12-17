@@ -3,6 +3,7 @@
 Model::Model()
     : itemId{0}
 {
+    previous = nullptr;
 }
 
 Model::~Model()
@@ -31,10 +32,13 @@ void Model::loadTest()
     n4 = new Node(i = ++itemId, "ITU2", Qt::yellow, 95, 95, 80);
     nodes[i] = n4;
 
-    Edge *e1;
-    e1 = new Edge(i = ++itemId, n1, n2, "fuckinflow");
-    edges[i] = e1;
+    addEdge(n1, n2, "fuckinflow");
+}
 
-    n1->addEdge(e1);
-    n2->addEdge(e1);
+void Model::addEdge(Node *from, Node *to, QString label)
+{
+    int i = ++itemId;
+    edges[i] = new Edge(i, from, to, label);
+    from->addEdge(edges[i]);
+    to->addEdge(edges[i]);
 }
