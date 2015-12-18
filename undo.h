@@ -17,19 +17,20 @@ class Model;
 class AddNodeCommand : public QUndoCommand
 {
 public:
-    AddNodeCommand(Model *model, Node *node,  QUndoCommand *parent = 0);
+    AddNodeCommand(Model *model, unsigned int id,  QUndoCommand *parent = 0);
     void undo() Q_DECL_OVERRIDE;
     void redo() Q_DECL_OVERRIDE;
 
 private:
     Model *model;
-    Node *node;
+    //Node *node;
+    unsigned int nodeId;
 };
 
 class DeleteSceneCommand : public QUndoCommand
 {
 public:
-    DeleteSceneCommand(Model *model, int id, QUndoCommand *parent = 0);
+    DeleteSceneCommand(Model *model, unsigned int id, QUndoCommand *parent = 0);
     void undo() Q_DECL_OVERRIDE;
     void redo() Q_DECL_OVERRIDE;
 

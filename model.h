@@ -32,8 +32,7 @@ public:
     Node *addNode(const QString label = "", const QColor color = Qt::gray, int x = 0, int y = 0, int len = 20);
     Node *addNode(Node *node);
     void saveAction(QUndoCommand *newCommand);
-
-    QUndoStack *undoStack() const {return m_undoStack;};
+    QUndoStack *undoStack() const {return m_undoStack;}
 
 private:    
     std::map<int, Node *> nodes;

@@ -2,10 +2,11 @@
 #include "model.h"
 #include <QDebug>
 
-AddNodeCommand::AddNodeCommand(Model* model, Node *node, QUndoCommand *parent)
+AddNodeCommand::AddNodeCommand(Model* model, unsigned int id, QUndoCommand *parent)
     : QUndoCommand(parent),
       model(model),
-      node(node)
+      //node(node),
+      nodeId(id)
 {
 
 }
@@ -18,11 +19,14 @@ void AddNodeCommand::undo()
 
 void AddNodeCommand::redo()
 {
-   model->addNode(node);
+    qDebug() << "fuck redo";
+   /*std::map<int, Node *> m = model->getNodes();
+   Node *node = m[nodeId];
+   model->addNode(node);*/
 }
 
-
-DeleteSceneCommand::DeleteSceneCommand(Model *model, int id, QUndoCommand *parent)
+/*
+DeleteSceneCommand::DeleteSceneCommand(Model *model, unsigned int id, QUndoCommand *parent)
     : QUndoCommand(parent)
 {
    ID = id;
@@ -36,4 +40,4 @@ void DeleteSceneCommand::undo()
 void DeleteSceneCommand::redo()
 {
     //Model->DeleteSceneItems(ID);
-}
+}*/
