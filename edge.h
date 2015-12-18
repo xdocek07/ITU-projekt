@@ -36,6 +36,7 @@ private:
     Node *from;
     Node *to;
     QString label;
+    QGraphicsTextItem *labelItem;
     QRectF rect;
 };
 

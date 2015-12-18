@@ -9,6 +9,10 @@ Edge::Edge(const unsigned int id, Node *from, Node *to, QString label)
 {
     active = false;
     rect = QRectF(from->x(), from->y(), to->x(), to->y());
+    labelItem = new QGraphicsTextItem(this);
+    labelItem->setTextInteractionFlags(Qt::TextInteractionFlag::TextEditable);
+    labelItem->setPos(rect.center().x(), rect.center().y() + 2);
+    labelItem->setPlainText(label);
 }
 
 Edge::~Edge()
@@ -77,7 +81,9 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     */
 
     QPointF labelPos = QPointF(start.x() + (abs(start.x() - end.x())), start.y() + (abs(start.y() - end.y()))) / 2.0;
-    painter->drawText(labelPos, label);
+    //painter->drawText(labelPos, label);
+
+    labelItem->setPos(labelPos);
 }
 
 void Edge::mousePressEvent(QGraphicsSceneMouseEvent *event)
