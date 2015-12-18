@@ -20,16 +20,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 /*  ACTIONS */
     QAction *actionNew = new QAction(tr("New Project"), this);
-    actionNew->setShortcut(QKeySequence(tr("Ctrl+N")));
-    connect(actionNew, SIGNAL(triggered()), SLOT(newWorkspace()));
+    actionNew->setShortcut(QKeySequence(tr("Ctrl+W")));
+    connect(actionNew, SIGNAL(triggered()), this, SLOT(newWorkspace()));
 
     QAction *actionOpen= new QAction(tr("Open Project"), this);
     actionOpen->setShortcut(QKeySequence(tr("Ctrl+O")));
-    connect(actionOpen, SIGNAL(triggered()), SLOT(openExistingWorkspace()));
+    connect(actionOpen, SIGNAL(triggered()), this, SLOT(openExistingWorkspace()));
 
     QAction *actionSave = new QAction(tr("Save Project"), this);
     actionSave->setShortcut(QKeySequence(tr("Ctrl+S")));
-    connect(actionSave, SIGNAL(triggered()), SLOT(saveWorkspace()));
+    connect(actionSave, SIGNAL(triggered()), this, SLOT(saveWorkspace()));
 
     QAction *actionExport= new QAction(tr("Export as PNG"), this);
     actionExport->setShortcut(QKeySequence(tr("Ctrl+Shift+E")));
@@ -37,29 +37,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QAction *actionQuit = new QAction(tr("Quit"), this);
     actionQuit->setShortcut(QKeySequence(tr("Ctrl+Q")));
-    connect(actionQuit, SIGNAL(triggered()), SLOT(QuitApp()));
+    connect(actionQuit, SIGNAL(triggered()), this, SLOT(QuitApp()));
 
     QAction *actionUndo = new QAction(tr("Undo"), this);
     actionUndo->setShortcut(QKeySequence(tr("Ctrl+Z")));
-    connect(actionUndo, SIGNAL(triggered()), SLOT(on_undoButton_clicked()));
+    connect(actionUndo, SIGNAL(triggered()), this, SLOT(on_undoButton_clicked()));
 
     QAction *actionRedo = new QAction(tr("Redo"), this);
     actionRedo->setShortcut(QKeySequence(tr("Ctrl+Y")));
-    connect(actionRedo, SIGNAL(triggered()), SLOT(on_redoButton_clicked()));
+    connect(actionRedo, SIGNAL(triggered()), this, SLOT(on_redoButton_clicked()));
 
-    //QAction *addNew = new QAction(tr("Insert new"), this);
-    //addNew->setShortcut(QKeySequence(tr("Ctrl+Shift+N")));
-    //connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
+    QAction *addNew = new QAction(tr("Insert new"), this);
+    addNew->setShortcut(QKeySequence(tr("Ctrl+N")));
+    connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
 
 
     QAction *ADDitemAction = new QAction(tr("Add new item"), this);
-    connect(ADDitemAction, SIGNAL(triggered()), SLOT(addNewItem()));
+    connect(ADDitemAction, SIGNAL(triggered()), this, SLOT(addNewNode()));
 
     QAction *ADDconnectionAction = new QAction(tr("Add new connection"), this);
-    connect(ADDconnectionAction, SIGNAL(triggered()), SLOT(addNewConnection()));
+    connect(ADDconnectionAction, SIGNAL(triggered()), this, SLOT(addNewConnection()));
 
     QAction *ADDtextAction = new QAction(tr("Add text"), this);
-    connect(ADDtextAction, SIGNAL(triggered()), SLOT(addText()));
+    connect(ADDtextAction, SIGNAL(triggered()), this, SLOT(addText()));
 
     QAction *deleteItems = new QAction(tr("Delete selected item"), this);
     deleteItems->setShortcut(QKeySequence::Delete);
@@ -219,6 +219,21 @@ void MainWindow::QuitApp()
     QApplication::quit();
 }
 
+void MainWindow::newWorkspace()
+{
+
+}
+
+void MainWindow::openExistingWorkspace()
+{
+
+}
+
+void MainWindow::saveWorkspace()
+{
+
+}
+
 void saveWorkspace()
 {
     //bude s aukladat iba file s insertmi a tie sa potom zas cele nacitaju? ci?
@@ -281,5 +296,5 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 
 void MainWindow::on_colorCombo_currentTextChanged(const QString &arg1)
 {
-    // implementacia zmeny farby objektu!!!!
+    // implementacia zmeny farby objektu!!!!    
 }

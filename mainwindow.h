@@ -45,7 +45,7 @@ private:
     QAction *actionUndo;
     QAction *actionRedo;
     QAction *deleteItems;
-    //QAction *addNew;
+    QAction *addNew;
     QAction *ADDitemAction;
     QAction *ADDconnectionAction;
     QAction *ADDtextAction;
@@ -63,9 +63,9 @@ protected slots:
 
 private slots:
     void QuitApp();
-    //void newWorkspace();
-    //void openExistingWorkspace();
-    //void saveWorkspace();
+    void newWorkspace();
+    void openExistingWorkspace();
+    void saveWorkspace();
     void addNewItem();
     void addNewConnection();
     void addText();
