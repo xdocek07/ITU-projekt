@@ -32,8 +32,9 @@ public:
     Node *addNode(Node *node);
     void addEdge(Node *from, Node *to, QString label = "");
     void saveAction(QUndoCommand *newCommand);
-
     QUndoStack *undoStack() const {return m_undoStack;}
+    /*QAction *undoAction;
+    QAction *redoAction;*/
 
 private:    
     std::map<int, Node *> nodes;
@@ -41,6 +42,7 @@ private:
     unsigned int itemId;
     Node *previous;
     QUndoStack *m_undoStack;
+
 };
 
 #endif // MODEL_H

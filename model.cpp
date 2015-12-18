@@ -10,7 +10,7 @@ Model::Model()
 {
     previous = nullptr;
     itemId = 0;
-
+    m_undoStack = new QUndoStack(this);
 
 
 }
@@ -49,12 +49,15 @@ Node *Model::addNode(const QString label, const QColor color, int x, int y, int 
     qDebug() << id << '\n';
 
     Node *node = new Node(id, label, color, x, y, len);
-    qDebug() << node;
+    //qDebug() << node;
     //nodes[id] = node;
 
-    AddNodeCommand *a = new AddNodeCommand(this, node);
-    saveAction(a);
+    QUndoCommand *a = new AddNodeCommand(this, node->getId());
+    //qDebug() << node->getId();
+    //nodes[id] = node;
 
+    //saveAction(a);
+    this->undoStack()->push(a);
     return node;
 }
 

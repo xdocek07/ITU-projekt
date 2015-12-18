@@ -14,9 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(this->width() - 10, this->height() - 15);
-    QUndoGroup *m_undoGroup = new QUndoGroup(this);
-
-    m_undoStack = new QUndoStack(this);
+    //m_undoStack = new QUndoStack(this);
+    //QUndoGroup *m_undoGroup = new QUndoGroup(this);
 
 
 
@@ -30,17 +29,23 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(deleteItems, SIGNAL(triggered()), this, SLOT(deleteSceneItems()));
     addAction(deleteItems);
 
-    m_undoGroup->addStack(m_undoStack);
-    m_undoGroup->setActiveStack(m_undoStack);
+    //m_undoGroup->addStack(m_undoStack);
+
 
     model = new Model();
     model->loadTest();
     updateScene();
 
-    QAction *undoAction = m_undoGroup->createUndoAction(this);
-    QAction *redoAction = m_undoGroup->createRedoAction(this);
+
+    undoAction = model->undoStack()->createUndoAction(model, tr("&Undo"));
+    redoAction = model->undoStack()->createRedoAction(model, tr("&Redo"));
     undoAction->setShortcut(QKeySequence(tr("Ctrl+Z")));
     redoAction->setShortcut(QKeySequence(tr("Ctrl+Y")));
+    //model->undoAction->setShortcuts(QKeySequence(tr("Ctrl+Z")));
+   /* QAction *undoAction = model->m_undoGroup->createUndoAction(this);
+    QAction *redoAction = model->m_undoGroup->createRedoAction(this);
+    undoAction->setShortcut(QKeySequence(tr("Ctrl+Z")));
+    redoAction->setShortcut(QKeySequence(tr("Ctrl+Y")));*/
 }
 
 MainWindow::~MainWindow()
@@ -54,6 +59,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateScene()
 {
+
+    //m_undoGroup->setActiveStack(m_undoStack);
     for(auto item : model->getNodes())
     {
          scene->addItem(item.second);

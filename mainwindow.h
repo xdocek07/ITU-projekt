@@ -27,8 +27,9 @@ private:
     QGraphicsScene *scene;
     Model *model;
     Node *previous;
-    QUndoGroup *m_undoGroup;
-    QUndoStack *m_undoStack;
+    QAction *undoAction;
+    QAction *redoAction;
+    //QUndoStack *m_undoStack;
 
 protected slots:
     void addNewNode();
