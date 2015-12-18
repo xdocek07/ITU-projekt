@@ -47,10 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     actionRedo->setShortcut(QKeySequence(tr("Ctrl+Y")));
     connect(actionRedo, SIGNAL(triggered()), this, SLOT(on_redoButton_clicked()));
 
-    QAction *addNew = new QAction(tr("Insert new"), this);
+    addNew = new QAction(tr("Insert new"), this);
     addNew->setShortcut(QKeySequence(tr("Ctrl+N")));
     connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
-
 
     QAction *ADDitemAction = new QAction(tr("Add new item"), this);
     connect(ADDitemAction, SIGNAL(triggered()), this, SLOT(addNewNode()));
@@ -172,11 +171,9 @@ void MainWindow::updateScene()
 
 void MainWindow::addNewNode()
 {
-    qDebug() << "fuck\n";
-    Node *node = new Node(58, "", Qt::blue);
-
+   qDebug() << "hello from addNewNode";
+   Node *node = model->addNode();
    scene->addItem(node);
-
    node->setScene(scene);
 }
 
@@ -278,11 +275,23 @@ void MainWindow::addText()
 void MainWindow::on_redoButton_clicked()
 {
     //redo implementace
+    if(model->undoStack()->canRedo()){
+        model->undoStack()->redo();
+    }
+    else{
+        qDebug() << "Nothing to redo here";
+    }
 }
 
 void MainWindow::on_undoButton_clicked()
 {
     //undo implementace
+    if(model->undoStack()->canUndo()){
+        model->undoStack()->undo();
+    }
+    else{
+        qDebug() << "Nothing to undo here";
+    }
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
