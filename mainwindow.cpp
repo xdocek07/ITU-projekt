@@ -46,12 +46,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QAction *actionRedo = new QAction(tr("Redo"), this);
     actionRedo->setShortcut(QKeySequence(tr("Ctrl+Y")));
     connect(actionRedo, SIGNAL(triggered()), this, SLOT(on_redoButton_clicked()));
-
+    /*
     addNew = new QAction(tr("Insert new"), this);
     addNew->setShortcut(QKeySequence(tr("Ctrl+N")));
     connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
-
+    */
     QAction *ADDitemAction = new QAction(tr("Add new item"), this);
+    ADDitemAction->setShortcut(QKeySequence(tr("Ctrl+N")));
     connect(ADDitemAction, SIGNAL(triggered()), this, SLOT(addNewNode()));
 
     QAction *ADDconnectionAction = new QAction(tr("Add new connection"), this);
@@ -93,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(this->width() - 10, this->height() - 15);
     model = new Model();
-    model->loadTest();
+    model->loadTest(scene);
 
 /*  COLOR COMBO */
     QPixmap px(15,15);
@@ -218,7 +219,10 @@ void MainWindow::QuitApp()
 
 void MainWindow::newWorkspace()
 {
-
+    scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+    delete model;
+    model = new Model();
 }
 
 void MainWindow::openExistingWorkspace()
@@ -260,6 +264,7 @@ void MainWindow::exportWorkspace()
 void MainWindow::addNewItem()
 {
     //add new item implementace
+    return addNewNode();
 }
 
 void MainWindow::addNewConnection()

@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <QGraphicsItem>
+#include <QGraphicsScene>
 #include <QString>
 #include "node.h"
 #include "edge.h"
@@ -21,7 +22,7 @@ public:
     Model();
     ~Model();
 
-    void loadTest();
+    void loadTest(QGraphicsScene *scene);
 
     std::map<int, Node *> &getNodes() {return nodes;}
     std::map<int, Edge *> &getEdges() {return edges;}
@@ -38,6 +39,7 @@ private:
     std::map<int, Node *> nodes;
     std::map<int, Edge *> edges;
     unsigned int itemId;
+    Node *current;
     Node *previous;
     QUndoStack *m_undoStack;
 
