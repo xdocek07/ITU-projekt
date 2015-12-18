@@ -40,15 +40,15 @@ private:
     QAction *actionQuit;
     QAction *actionUndo;
     QAction *actionRedo;
-    QAction *bringToFrontaction;
-    QAction *bringToBackaction;
-    QAction *actionRotate;
     QAction *deleteItems;
-    QAction *addNew;
+    //QAction *addNew;
+    QAction *ADDitemAction;
+    QAction *ADDconnectionAction;
+    QAction *ADDtextAction;
 
     QMenu *fileMenu;
     QMenu *editMenu;
-    QMenu *itemMenu;
+    QMenu *insertMenu;
 
     //QComboBox *sceneScaleCombo;
 
@@ -62,11 +62,14 @@ private slots:
     //void newWorkspace();
     //void openExistingWorkspace();
     //void saveWorkspace();
+    void addNewItem();
+    void addNewConnection();
+    void addText();
     void exportWorkspace();
     void on_redoButton_clicked();
     void on_undoButton_clicked();
-    //void Rotate();
     void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_colorCombo_currentTextChanged(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H

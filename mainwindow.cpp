@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     actionSave->setShortcut(QKeySequence(tr("Ctrl+S")));
     connect(actionSave, SIGNAL(triggered()), SLOT(saveWorkspace()));
 
-    QAction *actionExport= new QAction(tr("Export"), this);
+    QAction *actionExport= new QAction(tr("Export as PNG"), this);
     actionExport->setShortcut(QKeySequence(tr("Ctrl+Shift+E")));
     connect(actionExport, SIGNAL(triggered()), this, SLOT(exportWorkspace()));
 
@@ -41,17 +41,22 @@ MainWindow::MainWindow(QWidget *parent) :
     actionRedo->setShortcut(QKeySequence(tr("Ctrl+Y")));
     connect(actionRedo, SIGNAL(triggered()), SLOT(on_redoButton_clicked()));
 
-    QAction *addNew = new QAction(tr("Insert new"), this);
-    addNew->setShortcut(QKeySequence(tr("Ctrl+Shift+N")));
-    connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
+    //QAction *addNew = new QAction(tr("Insert new"), this);
+    //addNew->setShortcut(QKeySequence(tr("Ctrl+Shift+N")));
+    //connect(addNew, SIGNAL(triggered()), this, SLOT(addNewNode()));
+
+    QAction *ADDitemAction = new QAction(tr("Add new item"), this);
+    connect(ADDitemAction, SIGNAL(triggered()), SLOT(addNewItem()));
+
+    QAction *ADDconnectionAction = new QAction(tr("Add new connection"), this);
+    connect(ADDconnectionAction, SIGNAL(triggered()), SLOT(addNewConnection()));
+
+    QAction *ADDtextAction = new QAction(tr("Add text"), this);
+    connect(ADDtextAction, SIGNAL(triggered()), SLOT(addText()));
 
     QAction *deleteItems = new QAction(tr("Delete selected item"), this);
     deleteItems->setShortcut(QKeySequence::Delete);
     connect(deleteItems, SIGNAL(triggered()), this, SLOT(deleteSceneItems()));
-
-    QAction *actionRotate = new QAction(tr("Rotate"), this);
-    actionRotate->setShortcut(QKeySequence(tr("Ctrl+R")));
-    //connect(actionRotate, SIGNAL(triggered()), SLOT(Rotate()));
 
 /*  MENU BAR */
     fileMenu = menuBar()->addMenu(tr("&File"));
@@ -60,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     fileMenu->addAction(actionOpen);
     fileMenu->addAction(actionSave);
     fileMenu->addAction(actionExport);
+
     fileMenu->addSeparator();
     fileMenu->addAction(actionQuit);
 
@@ -67,19 +73,52 @@ MainWindow::MainWindow(QWidget *parent) :
     editMenu->addAction(actionUndo);
     editMenu->addAction(actionRedo);
     editMenu->addSeparator();
-    editMenu->addAction(addNew);
+
+    insertMenu = editMenu->addMenu(tr("&Insert New"));
+    insertMenu->addAction(ADDitemAction);
+    insertMenu->addAction(ADDconnectionAction);
+    insertMenu->addAction(ADDtextAction);
+
     editMenu->addSeparator();
     editMenu->addAction(deleteItems);
-    editMenu->addSeparator();
-    editMenu->addAction(actionRotate);
-
-/*  TOOL BOX */
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(this->width() - 10, this->height() - 15);
     model = new Model();
     model->loadTest();
+
+/*  COLOR COMBO */
+    QPixmap px(15,15);
+    px.fill(QColor(Qt::white));
+    QIcon icon(px);
+    ui->colorCombo->addItem(icon, "White");
+
+    px.fill(QColor(Qt::black));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Black");
+
+    px.fill(QColor(Qt::gray));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Gray");
+
+    px.fill(QColor(Qt::red));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Red");
+
+    px.fill(QColor(Qt::green));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Green");
+
+    px.fill(QColor(Qt::blue));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Blue");
+
+    px.fill(QColor(Qt::yellow));
+    icon.addPixmap(px);
+    ui->colorCombo->addItem(icon, "Yellow");
+
+/*  ToolBox */
 
     updateScene();
 
@@ -187,6 +226,21 @@ void MainWindow::exportWorkspace()
     }
 }
 
+void MainWindow::addNewItem()
+{
+    //add new item implementace
+}
+
+void MainWindow::addNewConnection()
+{
+    //add new connection implementace
+}
+
+void MainWindow::addText()
+{
+    //add text implementace
+}
+
 void MainWindow::on_redoButton_clicked()
 {
     //redo implementace
@@ -196,12 +250,7 @@ void MainWindow::on_undoButton_clicked()
 {
     //undo implementace
 }
-/*
-void MainWindow::Rotate()
-{
-    //rotate item
-}
-*/
+
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
     double newScale = arg1.left(arg1.indexOf(tr("%"))).toDouble()/100.0;
@@ -209,4 +258,9 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
     this->ui->graphicsView->resetMatrix();
     this->ui->graphicsView->translate(oldMatrix.dx(),oldMatrix.dy());
     this->ui->graphicsView->scale(newScale, newScale);
+}
+
+void MainWindow::on_colorCombo_currentTextChanged(const QString &arg1)
+{
+    // implementacia zmeny farby objektu!!!!
 }

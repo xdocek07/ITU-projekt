@@ -25,39 +25,6 @@
     <item row="1" column="1" colspan="4">
      <widget class="QGraphicsView" name="graphicsView"/>
     </item>
-    <item row="0" column="0" rowspan="2">
-     <widget class="QToolBox" name="toolBox">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="item1">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>159</width>
-         <height>188</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Items</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="page_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>159</width>
-         <height>188</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Page 2</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QComboBox" name="colorCombo"/>
     </item>
@@ -135,6 +102,39 @@
       </item>
      </widget>
     </item>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QToolBox" name="toolBox">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>180</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>6000</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="wgt">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>150</width>
+         <height>219</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Insert</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2"/>
+      </widget>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -152,7 +152,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
